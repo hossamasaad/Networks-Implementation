@@ -42,3 +42,33 @@ lenet5 = LeNet5()
 lenet5.build(input_shape=(None, 32, 32, 1))
 
 lenet5.summary()
+
+"""
+Model: "LeNet-5"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv2d (Conv2D)             multiple                  156       
+                                                                 
+ average_pooling2d (AverageP  multiple                 0         
+ ooling2D)                                                       
+                                                                 
+ conv2d_1 (Conv2D)           multiple                  2416      
+                                                                 
+ average_pooling2d_1 (Averag  multiple                 0         
+ ePooling2D)                                                     
+                                                                 
+ flatten (Flatten)           multiple                  0         
+                                                                 
+ dense (Dense)               multiple                  48120     
+                                                                 
+ dense_1 (Dense)             multiple                  10164     
+                                                                 
+ dense_2 (Dense)             multiple                  850       
+                                                                 
+=================================================================
+Total params: 61,706
+Trainable params: 61,706
+Non-trainable params: 0
+_________________________________________________________________
+"""
