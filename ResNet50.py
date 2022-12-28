@@ -123,48 +123,38 @@ class ResNet50(Model):
 
 
     def call(self, inputs):
-        print("\n\n\n\n")
         # Block-1
         x = self.conv(inputs)
         x = self.batch_norm(x)
         x = self.activation(x)
         x = self.max_pool(x)
-        print(x)
         
         # Block-2
         x = self.conv_block2(x)
         x = self.identity_block2a(x)
         x = self.identity_block2b(x)
-        print(x)
 
         # Block-3
         x = self.conv_block3(x)
         x = self.identity_block3a(x)
         x = self.identity_block3b(x)
-        print(x)
-
 
         # Block-4
         x = self.conv_block4(x)
         x = self.identity_block4a(x)
         x = self.identity_block4b(x)
-        print(x)
-
 
         # Block-5
         x = self.conv_block5    (x)
         x = self.identity_block5a(x)
         x = self.identity_block5b(x)
-        print(x)
 
         # Pooling
         x = self.average_pool(x)
-        print(x)
 
         # classifier
         x = self.flatten(x)
         x = self.dense(x)
-        print(x)
 
         return x
 
@@ -172,3 +162,53 @@ class ResNet50(Model):
 resnet50 = ResNet50()
 resnet50.build(input_shape=(None, 64, 64, 3))
 resnet50.summary()
+
+"""
+Model: "ResNet50"
+_______________________________________________________________________________
+ Layer (type)                               Output Shape             Param #   
+===============================================================================
+ conv2d (Conv2D)                            multiple                 9472      
+                                                                 
+ batch_normalization (BatchNormalization)   multiple                 256       
+                                                                 
+ activation (Activation)                    multiple                 0         
+                                                                 
+ max_pooling2d (MaxPooling2D)               multiple                 0         
+                                                                 
+ conv_block (ConvBlock)                     multiple                 76928     
+                                                                 
+ identity_block (IdentityBlock)             multiple                 71552     
+                                                                 
+ identity_block_1 (IdentityBlock)           multiple                 71552     
+                                                                 
+ conv_block_1 (ConvBlock)                   multiple                 383232    
+                                                                 
+ identity_block_2 (IdentityBlock)           multiple                 282368    
+                                                                 
+ identity_block_3 (IdentityBlock)           multiple                 282368    
+                                                                 
+ conv_block_2 (ConvBlock)                   multiple                 1520128   
+                                                                 
+ identity_block_4 (IdentityBlock)           multiple                 1121792   
+                                                                 
+ identity_block_5 (IdentityBlock)           multiple                 1121792                                                              
+                                                                 
+ conv_block_3 (ConvBlock)                   multiple                 6054912   
+                                                                 
+ identity_block_6 (IdentityBlock)           multiple                 4471808   
+                                                                 
+ identity_block_7 (IdentityBlock)           multiple                 4471808   
+                                                           
+ average_pooling2d (AveragePooling2D)       multiple                 0                           
+                                                                 
+ flatten (Flatten)                          multiple                 0         
+                                                                 
+ dense (Dense)                              multiple                 12294     
+                                                                 
+=================================================================================
+Total params: 19,952,262
+Trainable params: 19,909,894
+Non-trainable params: 42,368
+_________________________________________________________________________________
+"""
