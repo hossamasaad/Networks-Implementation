@@ -6,17 +6,20 @@
 ## 2. Unet
 ![U-net](images/unet.png)
 
-## 3. GoogleNet - IncevptionV1
+## 3. ShelfNet
+![ShelfNet](images/shelfnet.png)
+
+## 4. GoogleNet - IncevptionV1
 ![GoogleNet](images/GoogleNet.png)
 
-## 4. ResNet50
+## 5. ResNet50
 ![ResNet50](images/ResNet50.png)
 
-## 5. VGG16
+## 6. VGG16
 ![VGG16](images/VGG16.png)
 
-## 6. AlexNet
+## 7. AlexNet
 ![AlexNet](images/AlexNet.png)
 
-## 7. LeNet
+## 8. LeNet
 ![LeNet](images/LeNet.png)
