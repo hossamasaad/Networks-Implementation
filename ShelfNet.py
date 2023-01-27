@@ -7,7 +7,6 @@ from keras.layers import (
     Cropping2D,
     Activation,
     MaxPooling2D,
-    UpSampling2D,
     Conv2DTranspose,
     BatchNormalization,
 )
@@ -155,10 +154,11 @@ def ShelfNet():
     d4 = s_block(vertical_input=d4, lateral_input=shortcut_e_1, n_filters=64)
 
     # output
-    output = Conv2DTranspose(filters=64, kernel_size=(7, 7), strides=2)(d4)
-    output = UpSampling2D()(output)
+    output = Conv2DTranspose(filters=64, kernel_size=(7, 7), strides=2, padding='valid', activation='relu')(d4)
+    output = Conv2DTranspose(filters=32, kernel_size=(7, 7), strides=2, padding='same', activation='softmax')(output)
     output = Cropping2D(cropping=(1, 1))(output)
-    output = Conv2D(filters=3, kernel_size=(1, 1), activation="softmax")(output)
+
+    output = Conv2D(filters=3, kernel_size=1, strides=1, activation='sigmoid', padding='same', name="OutputLayer")(output)
 
     model = Model(inputs=inputs, outputs=output)
 

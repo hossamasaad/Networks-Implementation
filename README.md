@@ -9,17 +9,20 @@
 ## 3. ShelfNet
 ![ShelfNet](images/shelfnet.png)
 
-## 4. GoogleNet - IncevptionV1
+## 4. SegNet
+![SegNet](images/segnet.png)
+
+## 5. GoogleNet - IncevptionV1
 ![GoogleNet](images/GoogleNet.png)
 
-## 5. ResNet50
+## 6. ResNet50
 ![ResNet50](images/ResNet50.png)
 
-## 6. VGG16
+## 7. VGG16
 ![VGG16](images/VGG16.png)
 
-## 7. AlexNet
+## 8. AlexNet
 ![AlexNet](images/AlexNet.png)
 
-## 8. LeNet
+## 9. LeNet
 ![LeNet](images/LeNet.png)
