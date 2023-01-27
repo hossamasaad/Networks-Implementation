@@ -1,5 +1,16 @@
 from keras.models import Model
-from keras.layers import Conv2D, BatchNormalization, Cropping2D, Activation, Dropout, add, Conv2DTranspose, MaxPooling2D, Input
+from keras.layers import (
+    add,
+    Input,
+    Conv2D,
+    Dropout,
+    Cropping2D,
+    Activation,
+    MaxPooling2D,
+    UpSampling2D,
+    Conv2DTranspose,
+    BatchNormalization,
+)
 
 
 def block_base(inputs, n_filters, stride):
@@ -27,13 +38,12 @@ def res_block(inputs, n_filters, stride):
 
 
 def ResNet18_backbone(inputs):
-
     x = Conv2D(64, (7, 7), strides=2, padding='valid')(inputs)
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
     x = MaxPooling2D((3, 3), strides=2)(x)
 
-    b1 = res_block(x , n_filters=64 , stride=1)
+    b1 = res_block(x, n_filters=64, stride=1)
     b2 = res_block(b1, n_filters=128, stride=2)
     b3 = res_block(b2, n_filters=256, stride=2)
     b4 = res_block(b3, n_filters=512, stride=2)
@@ -42,7 +52,6 @@ def ResNet18_backbone(inputs):
 
 
 def s_block(vertical_input, lateral_input, n_filters):
-
     shared = Conv2D(filters=n_filters, kernel_size=(3, 3), padding='same')
 
     inputs = add([vertical_input, lateral_input])
@@ -146,7 +155,10 @@ def ShelfNet():
     d4 = s_block(vertical_input=d4, lateral_input=shortcut_e_1, n_filters=64)
 
     # output
-    output = Conv2D(filters=3, kernel_size=(1, 1), activation="softmax")(d4)
+    output = Conv2DTranspose(filters=64, kernel_size=(7, 7), strides=2)(d4)
+    output = UpSampling2D()(output)
+    output = Cropping2D(cropping=(1, 1))(output)
+    output = Conv2D(filters=3, kernel_size=(1, 1), activation="softmax")(output)
 
     model = Model(inputs=inputs, outputs=output)
 
